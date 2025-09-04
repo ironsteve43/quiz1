@@ -71,7 +71,7 @@ Nossos testes utilizam o framework de testes [pytest](https://docs.pytest.org).
 Instale o pytest:
 
 ```
-$ pip install pytest
+$ pip install pytest 
 ```
 
 ### Rode os testes localmente
