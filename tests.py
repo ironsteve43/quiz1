@@ -114,3 +114,24 @@ def test_list_choices():
     assert len(choices) == 2
     assert question._find_choice_by_id(choices[0]).text == 'a'
     assert question._find_choice_by_id(choices[1]).text == 'b'
+    
+@pytest.fixture
+def question_with_choices():
+    question = Question(title='q1', max_selections=2)
+    question.add_choice('a', False)
+    question.add_choice('b', True)
+    return question
+
+def test_correct_selected_choices(question_with_choices):
+    question = question_with_choices
+    selected_ids = [1, 2]
+    
+    correct_ids = question.correct_selected_choices(selected_ids)
+    assert correct_ids == [2]
+
+def test_correct_selected_choices_exceeds_max(question_with_choices):
+    question = question_with_choices
+    selected_ids = [1, 2, 3]
+    
+    with pytest.raises(Exception):
+        question.correct_selected_choices(selected_ids)
